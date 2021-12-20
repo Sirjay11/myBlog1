@@ -1,7 +1,9 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./topbar.css";
 
 export default function TopBar() {
+  const user = false;
   return (
     <div className="top">
       <div className="topLeft">
@@ -13,20 +15,56 @@ export default function TopBar() {
 
       <div className="topCenter">
         <ul className="topList">
-          <li className="topListItem">HOME</li>
-          <li className="topListItem">ABOUT</li>
-          <li className="topListItem">CONTACT</li>
-          <li className="topListItem">WRITE</li>
-          <li className="topListItem">LOGOUT</li>
+          <li className="topListItem">
+            <Link className="link" to="/">
+              HOME
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/sidebar">
+              ABOUT
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/contact">
+              CONTACT
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/write">
+              WRITE
+            </Link>
+          </li>
+          {/* <li className="topListItem">
+            <Link className="link" to="/logout">
+              LOGOUT
+            </Link>
+          </li> */}
         </ul>
       </div>
 
       <div className="topRight">
-        <img
-          className="topImg"
-          src="https://images.generated.photos/K0TDowYhxxuMqL3Wx560eUVjLUdZadruCMosSlGdkvQ/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDU5MzA3LmpwZw.jpg"
-          alt=""
-        />
+        {user ? (
+          <img
+            className="topImg"
+            src="https://images.generated.photos/K0TDowYhxxuMqL3Wx560eUVjLUdZadruCMosSlGdkvQ/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDU5MzA3LmpwZw.jpg"
+            alt=""
+          />
+        ) : (
+          <ul className="topList">
+            <li className="topListItem">
+              <Link className="link" to="/login">
+                LOGIN
+              </Link>
+            </li>
+            <li>
+              <Link className="link" to="/register">
+                REGISTER
+              </Link>
+            </li>
+          </ul>
+        )}
+
         <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
       </div>
     </div>
