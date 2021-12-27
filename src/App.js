@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route  } from "react-router-dom";
 import Single from './components/pages/single/Single';
 import TopBar from "./components/topbar/TopBar";
 import Home from "./components/pages/home/Home";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
         <Route path="/write">{user ? <Write /> : <Register />}</Route>
         <Route path="/settings">{user ? <Settings /> : <Register />}</Route>
-        <Route path="/post/:postID">
+        <Route path="/post/:postId">
           <Single />
         </Route>
       </Switch>

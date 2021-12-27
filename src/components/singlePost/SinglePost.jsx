@@ -1,17 +1,34 @@
 import React from "react";
+import axios from "axios";
 import "./singlePost.css";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SinglePost() {
+  const location = useLocation();
+  // console.log(location)
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+  console.log(post)
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/posts/" + path);
+      // console.log(res);
+      setPost(res.data);
+    };
+    getPost();
+  }, [path]);
+
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          src="https://images.pexels.com/photos/614117/pexels-photo-614117.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          alt=""
-          className="singlePostImg"
-        />
+        {post.photo && (
+          <img src={post.photo} alt="" className="singlePostImg" />
+        )}
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fa-regular fa-pen-to-square"></i>
             <i className="singlePostIcon fa-regular fa-trash-can"></i>
@@ -19,31 +36,16 @@ export default function SinglePost() {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>James Alexander</b>
+            Author:
+            <Link to={`/?user={post.username}`}>
+              <b>{post.username}</b>
+            </Link>
           </span>
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-          reiciendis esse, quam odit consectetur, expedita dolores adipisci
-          delectus velit, sapiente mollitia sequi? Ut exercitationem natus,
-          laudantium minus reprehenderit deserunt Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Accusamus reiciendis esse, quam odit
-          consectetur, expedita dolores adipisci delectus velit, sapiente
-          mollitia sequi? Ut exercitationem natus, laudantium minus
-          reprehenderit deseruntLorem ipsum dolor sit amet consectetur
-          adipisicing elit. Accusamus reiciendis esse, quam odit consectetur,
-          expedita dolores adipisci delectus velit, sapiente mollitia sequi? Ut
-          exercitationem natus, laudantium minus reprehenderit deseruntLorem
-          ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-          reiciendis esse, quam odit consectetur, expedita dolores adipisci
-          delectus velit, sapiente mollitia sequi? Ut exercitationem natus,
-          laudantium minus reprehenderit deseruntLorem ipsum dolor sit amet
-          consectetur adipisicing elit. Accusamus reiciendis esse, quam odit
-          consectetur, expedita dolores adipisci delectus velit, sapiente
-          mollitia sequi? Ut exercitationem natus, laudantium minus
-          reprehenderit deserunt
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );
