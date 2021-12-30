@@ -49,7 +49,7 @@ export default function TopBar() {
         {user ? (
           <img
             className="topImg"
-            src="https://images.generated.photos/K0TDowYhxxuMqL3Wx560eUVjLUdZadruCMosSlGdkvQ/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/NDU5MzA3LmpwZw.jpg"
+            src={user.profilePic}
             alt=""
           />
         ) : (

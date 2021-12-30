@@ -6,6 +6,7 @@
  top: 0;
  display: flex;
  align-items: center;
+ justify-content: center;
  font-family: 'Josefin Sans', sans-serif;
  z-index: 999;
 }
@@ -21,6 +22,7 @@
  flex: 6;
  display: flex;
  align-items: center;
+ justify-content: center;
 }
 
 .topIcon{
@@ -56,7 +58,7 @@
  font-size: 18px;
  color: #666;
  cursor: pointer;
- margin-left: 15px;
- 
+ margin-left: 65px;
+ margin-right: 0px;
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useContext, useRef,  } from "react";
+import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 import "./login.css";
@@ -8,32 +8,31 @@ import "./login.css";
 export default function Login() {
   const userRef = useRef();
   const passwordRef = useRef();
-  const {  dispatch, isFetching } = useContext(Context);
+  const { dispatch, isFetching } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({
       type: "LOGIN_START",
     });
+
     try {
-      const res =  await axios.post("/auth/login", {
+      const res = await axios.post("/auth/login", {
         username: userRef.current.value,
         password: passwordRef.current.value,
       });
       dispatch({
         type: "LOGIN_SUCCESS",
-        payload:res.data,
+        payload: res.data,
       });
     } catch (err) {
       dispatch({
         type: "LOGIN_FAILURE",
-        
       });
     }
   };
 
   
-
   return (
     <div className="login">
       <span className="loginTitle">Login</span>
@@ -58,7 +57,7 @@ export default function Login() {
       </form>
       <button className="loginRegisterButton">
         <Link className="link" to="/register">
-          REGISTER
+          Register
         </Link>
       </button>
     </div>
